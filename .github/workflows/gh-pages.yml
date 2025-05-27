@@ -28,6 +28,10 @@ jobs:
       - name: Build
         run: npm run build -- --mode production
 
+      - name: Copy index.html to 404.html
+        run: cp dist/index.html dist/404.html
+
+
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v3 # Upload build artifacts for GitHub Pages
         with:
