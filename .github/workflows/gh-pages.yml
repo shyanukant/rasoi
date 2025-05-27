@@ -24,11 +24,14 @@ jobs:
       - name: Build
         run: npm run build -- --mode production
 
-      - name: Copy index.html to 404.html
-        run: cp dist/index.html dist/404.html
+      - name: Upload artifacts
+        uses: actions/upload-pages-artifact@v3 # Upload build artifacts for GitHub Pages
+        with:
+           name: 'github-pages' # Name of the artifact
+           path: dist # Path to the build output directory
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+        uses: actions/deploy-pages@v4 # Deploy the artifacts to GitHub Pages
+        with: 
+          token: ${{ secrets.GITHUB_TOKEN }} # GitHub token for authentication
+          artifact_name: 'github-pages' # Name of the artifact to deploy
