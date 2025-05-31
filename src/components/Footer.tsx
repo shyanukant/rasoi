@@ -1,6 +1,9 @@
 import React from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Footer = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
   return (
     <footer className="bg-rasoi-brown border-t border-rasoi-gold/20">
       <div className="container mx-auto px-4 py-12">
@@ -75,9 +78,15 @@ const Footer = () => {
                   <button 
                     onClick={() => {
                       const element = document.getElementById(link.toLowerCase());
-                      if (element) {
+                      if (location.pathname === '/'){
+                        if (element) {
+                        
                         element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }else {
+                        navigate('/', {state: { scrollTo: link.toLowerCase() }});
                       }
+                      
                     }}
                     className="text-rasoi-cream/80 hover:text-rasoi-gold transition-colors duration-300"
                   >
@@ -103,7 +112,7 @@ const Footer = () => {
         <div className="border-t border-rasoi-gold/20 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-rasoi-cream/60 mb-4 md:mb-0">
-              © 2024 Rasoi Restaurant. All rights reserved. Made with ❤️ for food lovers.
+              © 2025 Rasoi Restaurant. All rights reserved. Made with ❤️ for food lovers.
             </p>
             <div className="flex space-x-6">
               <a href="/privacy" className="text-rasoi-cream/60 hover:text-rasoi-gold transition-colors duration-300">Privacy Policy</a>

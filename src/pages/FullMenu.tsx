@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import CustomCursor from '@/components/CustomCursor';
+import Chatbot from '@/components/Chatbot';
 
 const FullMenu = () => {
   const [activeCategory, setActiveCategory] = useState('appetizers');
@@ -130,6 +131,8 @@ const FullMenu = () => {
       </section>
 
       <Footer />
+      <Chatbot />
+
     </div>
   );
 };
