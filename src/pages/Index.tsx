@@ -1,4 +1,6 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+// components 
 import CustomCursor from '@/components/CustomCursor';
 import FloatingElements from '@/components/FloatingElements';
 import Header from '@/components/Header';
@@ -12,6 +14,15 @@ import Footer from '@/components/Footer';
 import Chatbot from '@/components/Chatbot';
 
 const Index = () => {
+  const location = useLocation();
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const element = document.getElementById(location.state.scrollTo);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location]);
   return (
     <div className="min-h-screen bg-rasoi-cream">
       <CustomCursor />

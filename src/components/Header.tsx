@@ -1,16 +1,33 @@
 import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const handleNav = (sectionId: string) => {
+    if (location.pathname === '/') {
+      // On home, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      setIsMenuOpen(false);
+    } else {
+      // If not on home, navigate to home and then scroll
+      navigate('/', {state: { scrollTo: sectionId }});
+      setIsMenuOpen(false);
     }
-    setIsMenuOpen(false);
-  };
+  }
+  // const scrollToSection = (sectionId: string) => {
+  //   const element = document.getElementById(sectionId);
+  //   if (element) {
+  //     element.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  //   setIsMenuOpen(false);
+  // };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-rasoi-brown/95 backdrop-blur-sm border-b border-rasoi-gold/20">
@@ -27,31 +44,31 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <button 
-              onClick={() => scrollToSection('home')}
+              onClick={() => handleNav('home')}
               className="text-rasoi-cream hover:text-rasoi-gold transition-colors duration-300 font-medium"
             >
               Home
             </button>
             <button 
-              onClick={() => scrollToSection('about')}
+              onClick={() => handleNav('about')}
               className="text-rasoi-cream hover:text-rasoi-gold transition-colors duration-300 font-medium"
             >
               About
             </button>
             <button 
-              onClick={() => scrollToSection('menu')}
+              onClick={() => handleNav('menu')}
               className="text-rasoi-cream hover:text-rasoi-gold transition-colors duration-300 font-medium"
             >
               Menu
             </button>
             <button 
-              onClick={() => scrollToSection('gallery')}
+              onClick={() => handleNav('gallery')}
               className="text-rasoi-cream hover:text-rasoi-gold transition-colors duration-300 font-medium"
             >
               Gallery
             </button>
             <button 
-              onClick={() => scrollToSection('contact')}
+              onClick={() => handleNav('contact')}
               className="text-rasoi-cream hover:text-rasoi-gold transition-colors duration-300 font-medium"
             >
               Contact
@@ -61,7 +78,7 @@ const Header = () => {
           {/* CTA Button */}
           <div className="hidden md:block">
             <Button 
-              onClick={() => scrollToSection('booking')}
+              onClick={() => handleNav('booking')}
               className="bg-rasoi-gold text-rasoi-brown hover:bg-rasoi-light-gold transition-all duration-300 font-semibold px-6 py-2 rounded-full"
             >
               Book Table
@@ -84,37 +101,37 @@ const Header = () => {
           <div className="md:hidden mt-4 pb-4 border-t border-rasoi-gold/20">
             <nav className="flex flex-col space-y-3 mt-4">
               <button 
-                onClick={() => scrollToSection('home')}
+                onClick={() => handleNav('home')}
                 className="text-rasoi-cream hover:text-rasoi-gold transition-colors duration-300 font-medium text-left"
               >
                 Home
               </button>
               <button 
-                onClick={() => scrollToSection('about')}
+                onClick={() => handleNav('about')}
                 className="text-rasoi-cream hover:text-rasoi-gold transition-colors duration-300 font-medium text-left"
               >
                 About
               </button>
               <button 
-                onClick={() => scrollToSection('menu')}
+                onClick={() => handleNav('menu')}
                 className="text-rasoi-cream hover:text-rasoi-gold transition-colors duration-300 font-medium text-left"
               >
                 Menu
               </button>
               <button 
-                onClick={() => scrollToSection('gallery')}
+                onClick={() => handleNav('gallery')}
                 className="text-rasoi-cream hover:text-rasoi-gold transition-colors duration-300 font-medium text-left"
               >
                 Gallery
               </button>
               <button 
-                onClick={() => scrollToSection('contact')}
+                onClick={() => handleNav('contact')}
                 className="text-rasoi-cream hover:text-rasoi-gold transition-colors duration-300 font-medium text-left"
               >
                 Contact
               </button>
               <Button 
-                onClick={() => scrollToSection('booking')}
+                onClick={() => handleNav('booking')}
                 className="bg-rasoi-gold text-rasoi-brown hover:bg-rasoi-light-gold transition-all duration-300 font-semibold px-6 py-2 rounded-full w-fit"
               >
                 Book Table
